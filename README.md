@@ -34,7 +34,7 @@ Then if your using sops you would encrypt in place like the [flux2 guide](https:
 
 ### Deploy the proxy using the [bitnami node.js chart](https://github.com/bitnami/charts/tree/master/bitnami/node)
 
-Make sure to update the AWS\_REGIUON env to the region your chart bucket is in.  I didn't include the declaration for the bitnami HelmRepository because if your reading this you probably already have it set up or know how to do it.
+Make sure to update the AWS\_REGION env to the region your chart bucket is in.  I didn't include the declaration for the bitnami HelmRepository because if your reading this you probably already have it set up or know how to do it.
 
 ```yaml
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
