@@ -18,7 +18,7 @@ The below examples are flux2 specific. 
 
 ### Set up Secrets
 
-I didn't dig deep enough into how the s3-basic-auth package works to know if it would work with just IAM roles set on the container .  So I just made a user specific to this with access to the s3 bucket it would use.
+I didn't dig to deep enough into how the s3-basic-auth package works to know if it would work with just IAM roles set on the container .  So I just made a user specific to this with access to the s3 bucket it would use.
 
 ```shell
 kubectl -n flux-system create secret generic s3-auth-proxy \
@@ -34,7 +34,7 @@ Then if your using sops you would encrypt in place like the [flux2 guide](https:
 
 ### Deploy the proxy using the [bitnami node.js chart](https://github.com/bitnami/charts/tree/master/bitnami/node)
 
-Make sure to update the AWS\_REGIUON env to the region your chart bucket is in.
+Make sure to update the AWS\_REGIUON env to the region your chart bucket is in.  I didn't include the declaration for the bitnami HelmRepository because if your reading this you probably already have it set up or know how to do it.
 
 ```yaml
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -97,9 +97,9 @@ spec:
       path: "/ready"
 ```
 
-### Deploy a flux2 HelmRepository  source that uses the proxy
+### Deploy a flux2 HelmRepository  source that uses the proxy and the secret for basic-auth
 
-```
+```yaml
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
@@ -110,5 +110,6 @@ spec:
   url: http://s3-auth-proxy
   secretRef:
     name: s3-auth-proxy
-
 ```
+
+From here you can create helm releases in the normal way you would in flux2 using your s3-helm-repo as the source.
