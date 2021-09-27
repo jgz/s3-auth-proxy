@@ -10,6 +10,7 @@
     "dependencies": {
         "express": "^4.13",
         "s3-basic-auth": "^1.2.0",
-        "dotenv": "^10.0.0"
+        "dotenv": "^10.0.0",
+        "@cloudnative/health-connect": "^2.1.0"
     }
 }

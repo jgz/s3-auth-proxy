@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 require('dotenv').config();
 var s3BasicAuth = require('s3-basic-auth');
+const health = require('@cloudnative/health-connect');
+let healthcheck = new health.HealthChecker();
 
 var protectedProxy = s3BasicAuth({
     key: process.env.AWS_ACCESS_KEY_ID,
@@ -14,6 +16,11 @@ var protectedProxy = s3BasicAuth({
 })
 
 app.use('/:path', protectedProxy); // Important: the `:path` param is expected by the middleware
+
+// Health Checks
+app.use('/live', health.LivenessEndpoint(healthcheck))
+app.use('/ready', health.ReadinessEndpoint(healthcheck))
+
 
 app.listen(3000, function () {
     console.log('listening on port 3000');
