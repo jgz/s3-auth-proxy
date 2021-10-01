@@ -18,7 +18,7 @@ The below example is flux2 specific. 
 
 ### Set up Secrets
 
-I didn't dig to deep into how the s3-basic-auth package works to know if it would work with just IAM roles set on the container .  So I just made a user specific to this with access to the s3 bucket it would use.
+I didn't dig to deep into how the s3-basic-auth package works to know if it would work with ISRA.  So I just made a user specific to this with access to the s3 bucket it would use.
 
 ```shell
 kubectl -n flux-system create secret generic s3-auth-proxy \
