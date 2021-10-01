@@ -112,4 +112,8 @@ spec:
     name: s3-auth-proxy
 ```
 
-From here you can create helm releases in the normal way you would in flux2 using your s3-helm-repo as the source.
+### Build image/chart and push to ecr/s3
+
+[This file](https://github.com/jgz/tpl-kube-ubuntu14-php5/blob/main/.github/workflows/ecr-docker-publish.yml) shows an example of how to build an image/chart then push them to ECR and an S3 helm chart repo.
+
+NOTE:  you'll need to create the repo's in ECR before hand as well as init the chart repo in S3 as explained [here](https://github.com/hypnoglow/helm-s3#init) in the helm-s3 docs.
